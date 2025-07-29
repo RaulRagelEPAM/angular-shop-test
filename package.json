@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "git": "sh -c 'git add . && git commit -m \"$1\" && git push'"
+    "git": "sh ./git-all.sh"
   },
   "private": true,
   "dependencies": {
