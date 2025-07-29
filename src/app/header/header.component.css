@@ -11,7 +11,7 @@
   height: 60px;
   display: flex;
   align-items: center;
-  background-color: #1976d2;
+  background-color: var(--blue);
   color: white;
   font-weight: 600;
 }
@@ -33,13 +33,34 @@ a:hover {
 }
 
 a:hover {
-  color: #c3002f;
+  color: var(--red);
 }
 
 .icon {
   margin: 0 1vw;
 }
 
+.cart-container {
+  display: flex;
+  align-items: center;
+}
+
 .info {
   margin: 0 1vw;
+}
+
+#cart-length {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--blue2);
+  color: white;
+  border-radius: 50%;
+  bottom: -5px;
+  left: 25px;
+  line-height: 21px;
+}
+
+.mat-icon-button:hover {
+  color: var(--red);
 }
