@@ -1,0 +1,3 @@
+
+Ejecutar add ., commit y push:
+npm run git -- "mensaje de commit"
