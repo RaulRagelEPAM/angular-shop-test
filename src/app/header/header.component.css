@@ -1,0 +1,45 @@
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover,
+.toolbar #youtube-logo:hover {
+  opacity: 0.8;
+}
+
+a,
+a:visited,
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #c3002f;
+}
+
+.icon {
+  margin: 0 1vw;
+}
+
+.info {
+  margin: 0 1vw;
+}

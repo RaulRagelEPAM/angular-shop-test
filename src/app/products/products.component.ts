@@ -18,6 +18,11 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productService: ProductService) { }
 
+  addToCart(product: Product): void {
+    console.log('Add to cart:', product);
+    this.productService.updateCart(product);
+  }
+
   ngOnInit(): void {
     this.loading$.next(true);
     this.productService.getProducts()

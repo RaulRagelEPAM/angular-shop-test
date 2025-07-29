@@ -1,5 +1,5 @@
 
-## npm run git -- "Add git command"
+## npm run git -- "commit message"
 
 git add .
 git commit -m "$1"

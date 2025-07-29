@@ -1,21 +1,30 @@
-<!-- <p>products works!</p>
-<app-product></app-product> -->
-
 
 <!-- Spinner -->
-<div *ngIf="loading$ | async" class="spinner">
-  Cargando productos...
+<div *ngIf="loading$ | async; else hasProducts" class="spinner">
+   <section class="products">
+        <h1>Cargando productos...</h1>
+    </section>
 </div>
 
 <!-- Productos -->
-<section class="products" *ngIf="!(loading$ | async)">
-    <mat-card class="card" *ngFor="let product of products">
-        
-    </mat-card>
-</section>
+ <ng-template #hasProducts>
+     <section class="products" *ngIf="products.length; else noProducts">
+         <app-product
+             *ngFor="let product of products"
+             [product]="product"
+             (addToCartEvent)="addToCart($event)">
+         </app-product>
+     </section>
+ </ng-template>
 
+<!-- No hay productos -->
+<ng-template #noProducts>
+    <section class="products">
+        <h1>No hay productos :(</h1>
+    </section>
+</ng-template>
 
 <!-- Error -->
-<div class="error" *ngIf="errorMsg">
+<div class="error" *ngIf="errorMsg && !products.length">
   Error: {{ errorMsg }}
 </div>
