@@ -1,1 +1,11 @@
-<p>shopping-cart works!</p>
+
+<div class="cart-container">
+    <span class="info">Total: {{ (total$ | async | currency) || 0 }}</span>
+    <button mat-icon-button (click)="toggleCart()">
+        <mat-icon class="icon">shopping_cart</mat-icon>
+        <div id="cart-length" *ngIf="(length$ | async) as length">
+            {{ length }}
+        </div>
+    </button>
+    <app-details *ngIf="cartIsOpen" [cart$]="cart$" (closeDetailsEvent)="toggleCart()"></app-details>
+</div>

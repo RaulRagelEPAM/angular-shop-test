@@ -39,28 +39,3 @@ a:hover {
 .icon {
   margin: 0 1vw;
 }
-
-.cart-container {
-  display: flex;
-  align-items: center;
-}
-
-.info {
-  margin: 0 1vw;
-}
-
-#cart-length {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: var(--blue2);
-  color: white;
-  border-radius: 50%;
-  bottom: -5px;
-  left: 25px;
-  line-height: 21px;
-}
-
-.mat-icon-button:hover {
-  color: var(--red);
-}

@@ -1,0 +1,17 @@
+
+<div class="details" *ngIf="(cart$ | async) as cart">
+    <div class="header">
+        <span>Detalles del carrito</span>
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="body">
+        {{ cart | json }}
+    </div>
+    <div class="actions">
+        <button mat-flat-button color="primary" (click)="onClick()">
+            Ir al pago
+        </button>
+    </div>
+</div>

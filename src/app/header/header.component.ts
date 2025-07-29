@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../products/service/products.service';
+
 
 @Component({
   selector: 'app-header',
@@ -8,10 +8,6 @@ import { ProductService } from '../products/service/products.service';
 })
 export class HeaderComponent {
 
-  constructor(private productService: ProductService) { }
-
-  cart$ = this.productService.cartAction$;
-  total$ = this.productService.totalAction$;
-  length$ = this.productService.lengthAction$;
+  constructor() { }
 
 }

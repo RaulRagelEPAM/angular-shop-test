@@ -10,6 +10,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './products/product/product.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingCartComponent } from './header/shopping-cart/shopping-cart.component';
+import { CartComponent } from './header/shopping-cart/details/details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ShoppingCartComponent } from './header/shopping-cart/shopping-cart.comp
     ProductsComponent,
     ProductComponent,
     HeaderComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

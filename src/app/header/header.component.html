@@ -9,16 +9,7 @@
     <span>Angular shop</span>
     <div class="spacer"></div>
     
-    <div class="cart-container">
-        <span class="info">Total: {{ (total$ | async | currency) || 0 }}</span>
-        <button mat-icon-button>
-            <mat-icon class="icon">shopping_cart</mat-icon>
-            <div id="cart-length" *ngIf="(length$ | async) as length">
-                {{ length }}
-            </div>
-        </button>
-        <!-- <app-shopping-cart *ngIf="cartIsOpen"></app-shopping-cart> -->
-    </div>
+    <app-shopping-cart></app-shopping-cart>
 
     <a class="icon" target="_blank" rel="noopener" href="https://github.com/RaulRagelEPAM/angular-shop-test" title="GitHub">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

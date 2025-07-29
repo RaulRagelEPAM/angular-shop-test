@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Product } from '../interface/product.interface';
 import { delay, map } from 'rxjs/operators';
 
@@ -29,9 +29,9 @@ export class ProductService {
 
   // CARRITO DE LA COMPRA
   private shoppingCart: Product[] = [];
-  private cartSubject = new Subject<Product[]>();
-  private totalSubject = new Subject<number>();
-  private lengthSubject = new Subject<number>();
+  private cartSubject = new BehaviorSubject<Product[]>([]);
+  private totalSubject = new BehaviorSubject<number>(0);
+  private lengthSubject = new BehaviorSubject<number>(0);
   //--------------------------------------------------------
 
   get cartAction$(): Observable<Product[]> {
