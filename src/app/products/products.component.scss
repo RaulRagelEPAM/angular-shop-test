@@ -1,0 +1,17 @@
+
+section.products {
+    display: flex;
+    flex-wrap: wrap;
+
+    .card {
+        margin: 1vw;
+        min-width: 180px;
+        min-height: 280px;
+        width: 10vw;
+        height: auto;
+    }
+
+    button {
+        width: 100%;
+    }
+}

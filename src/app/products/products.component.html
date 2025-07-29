@@ -1,1 +1,21 @@
-<p>products works!</p>
+<!-- <p>products works!</p>
+<app-product></app-product> -->
+
+
+<!-- Spinner -->
+<div *ngIf="loading$ | async" class="spinner">
+  Cargando productos...
+</div>
+
+<!-- Productos -->
+<section class="products" *ngIf="!(loading$ | async)">
+    <mat-card class="card" *ngFor="let product of products">
+        
+    </mat-card>
+</section>
+
+
+<!-- Error -->
+<div class="error" *ngIf="errorMsg">
+  Error: {{ errorMsg }}
+</div>
