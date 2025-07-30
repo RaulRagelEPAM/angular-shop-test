@@ -34,12 +34,34 @@ export class CartService {
     this.isOpen$.next(!this.isOpen$.value);
   }
 
-  remove(product?: Details) {
-    if(product) this.removeFromCart(product);
+  /**
+   * Borrar desde los detalles del carrito. Podemos borrar de uno en uno
+   * usando el id del producto o borrar todo el grupo de productos.
+   * @param productId 
+   * @param removeGroup 
+   */
+  removeById(productId?: number, removeGroup?: boolean) {
+    if(productId) this.removeFromCart(productId, removeGroup);
     else this.shoppingCart = [];
     this.updateCart();
   }
 
+  /**
+   * Agregar desde los detalles del carrito. Como es un producto que ya
+   * tenemos, simplemente lo localizamos para agregar el mismo y que aumente
+   * la cantidad de este producto.
+   * @param productId 
+   */
+  addById(productId: number) {
+    let foundItem = this.utils.itemById(this.shoppingCart, productId);
+    this.addToCart(foundItem);
+  }
+
+  /**
+   * Agregar un nuevo producto y actualizar el observable del carrito para
+   * avisar a los suscriptores del mismo.
+   * @param product 
+   */
   addToCart(product: Product): void {
     this.shoppingCart.push(product);
     this.updateCart();
@@ -63,11 +85,16 @@ export class CartService {
     this.lengthSubject.next(length);
   }
 
-  private removeFromCart(item: Details): void {
-    debugger;
+  private removeFromCart(productId?: number, removeGroup?: boolean): void {
     console.log('this.shoppingCart', this.shoppingCart);
-    this.shoppingCart.splice(
-      this.utils.indexById(this.shoppingCart, item.id), 1
-    );
+    if(removeGroup)  {
+      this.shoppingCart = this.shoppingCart.filter(
+        item => item.id !== productId
+      );
+    } else {
+      this.shoppingCart.splice(
+        this.utils.indexById(this.shoppingCart, productId!), 1
+      );  
+    }
   }
 }

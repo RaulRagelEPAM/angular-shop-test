@@ -48,8 +48,12 @@ export class CartComponent implements OnInit {
     console.log('Ir al pago');
   }
 
-  cleanCart() {
-    this.cartService.remove();
+  remove(productId?: number, removeGroup?: boolean) {
+    this.cartService.removeById(productId, removeGroup);
+  }
+
+  add(productId: number) {
+    this.cartService.addById(productId);
   }
 
   onClose() {
@@ -78,7 +82,6 @@ export class CartComponent implements OnInit {
       }
     }
     this.detailItems$.next(detailItems);
-    console.log('detailItems', this.detailItems$);
   }
 
 }

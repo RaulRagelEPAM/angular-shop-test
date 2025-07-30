@@ -23,17 +23,23 @@
                 </div>
                 <div class="info">
                     <div>
-                        Cantidad: {{ item.quantity }}
+                         <button mat-icon-button color="warn" title="Eliminar" (click)="remove(item.id)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <span>{{ item.quantity }}</span>
+                         <button mat-icon-button color="primary" title="Agregar" (click)="add(item.id)">
+                            <mat-icon>add</mat-icon>
+                        </button>
                     </div>
                     <div>
-                        Precio: {{ item.totalPrice | currency}}
+                        Precio: <strong>{{ item.totalPrice | currency}}</strong>
                     </div>
                 </div>
             </div>
          </mat-card>
     </div>
     <div class="actions">
-        <button mat-flat-button color="error" (click)="cleanCart()">
+        <button mat-flat-button color="error" (click)="remove()">
             Vaciar carrito <mat-icon>delete</mat-icon>
         </button>
         <button mat-flat-button color="primary" (click)="checkout()">
