@@ -12,6 +12,9 @@
             <span>No hay productos en el carrito...</span>
          </div>
          <mat-card *ngFor="let item of items">
+            <button mat-icon-button color="warn" title="Eliminar grupo" (click)="remove(item.id, true)">
+                <mat-icon>delete</mat-icon>
+            </button>
             <div class="image-container">
                 <img [src]="item.image">
             </div>
