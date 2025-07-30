@@ -11,6 +11,7 @@ import { ProductComponent } from './products/product/product.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingCartComponent } from './header/shopping-cart/shopping-cart.component';
 import { CartComponent } from './header/shopping-cart/details/details.component';
+import { FiltersComponent } from './filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CartComponent } from './header/shopping-cart/details/details.component'
     ProductComponent,
     HeaderComponent,
     ShoppingCartComponent,
-    CartComponent
+    CartComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
