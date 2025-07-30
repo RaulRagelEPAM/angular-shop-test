@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { Product } from 'src/app/products/interface/product.interface';
 import { CartService } from '../service/cart.service';
 import { Details } from './interface/details';
+import { UtilsService } from 'src/app/utils.service';
 
 @Component({
   selector: 'app-details',
@@ -22,7 +23,7 @@ export class CartComponent implements OnInit {
   isOpen: boolean = false;
   totalPrice!: number;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private utils: UtilsService) { }
 
   ngOnInit(): void {
     this.cart$ = this.cartService.cartItems$; // ** obervable del carrito
@@ -48,7 +49,7 @@ export class CartComponent implements OnInit {
   }
 
   cleanCart() {
-    this.detailItems$.next([]);
+    this.cartService.remove();
   }
 
   onClose() {
@@ -62,7 +63,7 @@ export class CartComponent implements OnInit {
     let foundItem: Details;
 
     for(let item of items) {
-      foundItem = this.searchById(detailItems, item.id);
+      foundItem = this.utils.itemById(detailItems, item.id);
       if(foundItem) {
         foundItem.quantity++;
         foundItem.totalPrice = Number((foundItem.totalPrice + item.price).toFixed(2));
@@ -78,10 +79,6 @@ export class CartComponent implements OnInit {
     }
     this.detailItems$.next(detailItems);
     console.log('detailItems', this.detailItems$);
-  }
-
-  searchById(items: Array<any>, id: number) {
-    return items.find(item => item.id === id);
   }
 
 }

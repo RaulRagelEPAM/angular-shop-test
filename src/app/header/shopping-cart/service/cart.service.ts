@@ -1,7 +1,9 @@
+import { UtilsService } from './../../../utils.service';
 import { Injectable } from '@angular/core';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/products/interface/product.interface';
+import { Details } from '../details/interface/details';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class CartService {
   private lengthSubject = new BehaviorSubject<number>(0);
   isOpen$ = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor(private utils: UtilsService) { }
 
   // ** Getter de angular sin necesidad de hacer una función además agregamos
   // ** asObservable que permite que solo sea de lectura (no tenemos las funiones de los observables al devolverlo)
@@ -32,15 +34,21 @@ export class CartService {
     this.isOpen$.next(!this.isOpen$.value);
   }
 
-  updateCart(product: Product): void {
-    this.addToCart(product);
-    this.setTotalPrice();
-    this.setTotalLength();
+  remove(product?: Details) {
+    if(product) this.removeFromCart(product);
+    else this.shoppingCart = [];
+    this.updateCart();
   }
 
-  private addToCart(product: Product): void {
+  addToCart(product: Product): void {
     this.shoppingCart.push(product);
+    this.updateCart();
+  }
+
+  updateCart(): void {
     this.cartSubject.next(this.shoppingCart);
+    this.setTotalPrice();
+    this.setTotalLength();
   }
 
   private setTotalPrice(): void {
@@ -53,5 +61,13 @@ export class CartService {
   private setTotalLength(): void {
     const length = this.shoppingCart.length;
     this.lengthSubject.next(length);
+  }
+
+  private removeFromCart(item: Details): void {
+    debugger;
+    console.log('this.shoppingCart', this.shoppingCart);
+    this.shoppingCart.splice(
+      this.utils.indexById(this.shoppingCart, item.id), 1
+    );
   }
 }
