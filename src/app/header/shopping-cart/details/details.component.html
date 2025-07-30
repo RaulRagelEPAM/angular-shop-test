@@ -7,11 +7,31 @@
         </button>
     </div>
     <div class="body">
-        {{ items | json }}
+        <!-- <pre>{{ detailItems | json }}</pre> -->
+         <mat-card *ngFor="let item of detailItems">
+            <div class="image-container">
+                <img [src]="item.image">
+            </div>
+            <div class="content">
+                <div class="header">
+                    <div class="clamp">
+                        {{ item.title }}
+                    </div>
+                </div>
+                <div class="info">
+                    <div>
+                        Cantidad: {{ item.quantity }}
+                    </div>
+                    <div>
+                        Precio: {{ item.totalPrice | currency}}
+                    </div>
+                </div>
+            </div>
+         </mat-card>
     </div>
     <div class="actions">
         <button mat-flat-button color="primary" (click)="checkout()">
-            Ir al pago
+            Ir al pago: {{ totalPrice | currency}}
         </button>
     </div>
 </div>
