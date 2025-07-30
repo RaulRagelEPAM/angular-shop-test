@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from './service/products.service';
+import { CartService } from '../header/shopping-cart/service/cart.service';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators'
 import { Product } from './interface/product.interface';
@@ -16,11 +17,11 @@ export class ProductsComponent implements OnInit {
   errorMsg: string = '';
   loading$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private cartService: CartService) { }
 
   addToCart(product: Product): void {
     console.log('Add to cart:', product);
-    this.productService.updateCart(product);
+    this.cartService.updateCart(product);
   }
 
   ngOnInit(): void {

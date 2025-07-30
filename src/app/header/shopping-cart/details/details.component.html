@@ -1,5 +1,5 @@
 
-<div class="details" *ngIf="(cart$ | async) as cart">
+<div class="details" *ngIf="isOpen">
     <div class="header">
         <span>Detalles del carrito</span>
         <button mat-icon-button (click)="onClose()">
@@ -7,10 +7,10 @@
         </button>
     </div>
     <div class="body">
-        {{ cart | json }}
+        {{ items | json }}
     </div>
     <div class="actions">
-        <button mat-flat-button color="primary" (click)="onClick()">
+        <button mat-flat-button color="primary" (click)="checkout()">
             Ir al pago
         </button>
     </div>

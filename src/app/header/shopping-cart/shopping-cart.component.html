@@ -7,5 +7,9 @@
             {{ length }}
         </div>
     </button>
-    <app-details *ngIf="cartIsOpen" [cart$]="cart$" (closeDetailsEvent)="toggleCart()"></app-details>
+    <!-- ** Opción pasandole los parámetros al componente -->
+    <!-- <app-details *ngIf="cartIsOpen" [cart$]="cart$" (closeDetailsEvent)="toggleCart()"></app-details> -->
+    <!-- ** Opción mandando el evento de close al padre (pero ahora el hijo también tiene el service) -->
+    <!-- <app-details (closeDetailsEvent)="toggleCart()"></app-details> -->
+     <app-details></app-details>
 </div>

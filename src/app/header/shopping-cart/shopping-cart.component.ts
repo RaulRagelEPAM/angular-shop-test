@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../products/service/products.service';
+import { CartService } from './service/cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -8,19 +9,17 @@ import { ProductService } from '../../products/service/products.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(private cartService: CartService) { }
 
-  cart$ = this.productService.cartAction$;
-  total$ = this.productService.totalAction$;
-  length$ = this.productService.lengthAction$;
-
-  cartIsOpen: boolean = false;
+  cart$ = this.cartService.cartItems$;
+  total$ = this.cartService.cartTotalPrice$;
+  length$ = this.cartService.cartLength$;
 
   ngOnInit(): void {
   }
 
   toggleCart(): void {
-    this.cartIsOpen = !this.cartIsOpen;
+    this.cartService.toggleCart();
   }
 
 }
