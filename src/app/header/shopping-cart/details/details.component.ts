@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Product } from 'src/app/products/interface/product.interface';
 import { CartService } from '../service/cart.service';
@@ -16,12 +16,11 @@ export class CartComponent implements OnInit {
   // @Input() cart$!: Observable<Product[]>;
   // @Output() closeDetailsEvent = new EventEmitter<void>();
   cart$!: Observable<Product[]>;
+  detailItems$ = new BehaviorSubject<Details[]>([]); // items parseados
 
   items: Product[] = []; // items del carrito
   isOpen: boolean = false;
   totalPrice!: number;
-  detailItems: Details[] = []; // items parseados
-  // detailItems: Array<any> = []; // items parseados
 
   constructor(private cartService: CartService) { }
 
@@ -48,21 +47,27 @@ export class CartComponent implements OnInit {
     console.log('Ir al pago');
   }
 
+  cleanCart() {
+    this.detailItems$.next([]);
+  }
+
   onClose() {
     this.cartService.toggleCart();
+    // ** Se puede hacer directamente:
+    // this.cartService.isOpen$.next(!this.isOpen);
   }
 
   setDetailItems(items: Product[]) {
+    let detailItems: Details[] = [];
     let foundItem: Details;
-    this.detailItems = [];
+
     for(let item of items) {
-      console.log('setDetailItems', item);
-      foundItem = this.searchById(this.detailItems, item.id);
+      foundItem = this.searchById(detailItems, item.id);
       if(foundItem) {
         foundItem.quantity++;
         foundItem.totalPrice = Number((foundItem.totalPrice + item.price).toFixed(2));
       } else {
-        this.detailItems.push({
+        detailItems.push({
           id: item.id,
           title: item.title,
           image: item.image,
@@ -71,6 +76,8 @@ export class CartComponent implements OnInit {
         });
       }
     }
+    this.detailItems$.next(detailItems);
+    console.log('detailItems', this.detailItems$);
   }
 
   searchById(items: Array<any>, id: number) {

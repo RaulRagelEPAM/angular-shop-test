@@ -5,3 +5,5 @@
 - Pagos
 - Detail page
 - Aumentar/disminuir cantidad de producto en los detalles
+- Usar API más grande con paginación
+- Login para guardar los datos a nivel de usuario

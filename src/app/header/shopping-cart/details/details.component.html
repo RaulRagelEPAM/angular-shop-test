@@ -6,9 +6,12 @@
             <mat-icon>close</mat-icon>
         </button>
     </div>
-    <div class="body">
+    <div class="body" *ngIf="(detailItems$ | async) as items">
         <!-- <pre>{{ detailItems | json }}</pre> -->
-         <mat-card *ngFor="let item of detailItems">
+         <div *ngIf="!items.length">
+            <span>No hay productos en el carrito...</span>
+         </div>
+         <mat-card *ngFor="let item of items">
             <div class="image-container">
                 <img [src]="item.image">
             </div>
@@ -30,6 +33,9 @@
          </mat-card>
     </div>
     <div class="actions">
+        <button mat-flat-button color="error" (click)="cleanCart()">
+            Vaciar carrito <mat-icon>delete</mat-icon>
+        </button>
         <button mat-flat-button color="primary" (click)="checkout()">
             Ir al pago: {{ totalPrice | currency}}
         </button>
