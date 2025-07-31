@@ -31,6 +31,24 @@ export class ProductService {
       tap(response => this.productsSubject.next(response))
     );
   }
+
+  getSearch(str: string): any {
+    return of(this.searchProducts(str));
+  }
+
+  searchProducts(str: string): any {
+    if(this.productsSubject.value) {
+      return this.productsSubject.value.filter(
+        item => this.clean(item.title).includes(this.clean(str))
+      );
+    }
+  }
+
+  clean(str: string) {
+    return str
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '');
+  }
 }
 
 

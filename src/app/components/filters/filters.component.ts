@@ -26,7 +26,7 @@ export class FiltersComponent implements OnInit {
       products => {
         if(products) this.parseFilters(products);
         // ** La primera vez es vacío porque BehaviorSubject emite un valor cuando nos suscribimos
-        console.log('filters', this.filters);
+        // console.log('filters', this.filters);
       }
     );
   };

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppMaterialModule } from './modules/materials.module';
 
@@ -13,6 +14,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { CartComponent } from './components/shopping-cart/details/details.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { CloudsComponent } from './components/clouds/clouds.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,15 @@ import { CloudsComponent } from './components/clouds/clouds.component';
     ShoppingCartComponent,
     CartComponent,
     FiltersComponent,
-    CloudsComponent
+    CloudsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AppMaterialModule
+    AppMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
