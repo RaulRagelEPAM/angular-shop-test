@@ -7,18 +7,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-svg#clouds {
-  position: fixed;
-  bottom: -160px;
-  left: -230px;
-  z-index: -10;
-  width: 1920px;
-}
-
-svg#clouds.top {
-  top: -160px;
-}
-
 .main {
   box-sizing: border-box;
   padding-top: 30px;

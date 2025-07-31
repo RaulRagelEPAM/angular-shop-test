@@ -32,7 +32,7 @@ export class FiltersComponent implements OnInit {
   };
 
   parseFilters(products: Product[]): void {
-    let uniqueFilters = [...new Set(products.map(item => item.category))];
+    let uniqueFilters = [...new Set(products.map(item => item.category))]; // ! y si viene otro nombre del back que no sea category?
     let filters = uniqueFilters.map(item => ({
       name: this.utils.capitalize(item),
       focused: false
@@ -41,6 +41,11 @@ export class FiltersComponent implements OnInit {
     filters.unshift({
       name: 'Todos',
       focused: true
+    });
+
+    filters.unshift({
+      name: 'Invent',
+      focused: false
     });
 
     this.filters = filters;

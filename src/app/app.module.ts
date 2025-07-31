@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CartComponent } from './components/shopping-cart/details/details.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { CloudsComponent } from './components/clouds/clouds.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FiltersComponent } from './components/filters/filters.component';
     HeaderComponent,
     ShoppingCartComponent,
     CartComponent,
-    FiltersComponent
+    FiltersComponent,
+    CloudsComponent
   ],
   imports: [
     BrowserModule,
