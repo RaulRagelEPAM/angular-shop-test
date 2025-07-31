@@ -1,3 +1,4 @@
+import { FiltersService } from './../../services/filters.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
 import { Product } from '../../interfaces/product.interface';
@@ -13,13 +14,16 @@ export class FiltersComponent implements OnInit {
 
   filters: Filter[] = [];
 
-  constructor(private productService: ProductService, private utils: UtilsService) { }
+  constructor(
+    private productService: ProductService,
+    private utils: UtilsService,
+    private filtersService:FiltersService
+  ) { }
 
   ngOnInit(): void {
-    this.productService.products$
+    this.productService.products$ // ** no hacemos llamada adicional, solo vemos los cambios en products
     .subscribe(
       products => {
-        // if(products) this.filters = [...new Set(products.map(item => item.category))];
         if(products) this.parseFilters(products);
         // ** La primera vez es vacío porque BehaviorSubject emite un valor cuando nos suscribimos
         console.log('filters', this.filters);
@@ -47,5 +51,7 @@ export class FiltersComponent implements OnInit {
       ...filter,
       focused: filter.name === filterSelected
     }));
+
+    this.filtersService.setFilter(filterSelected);
   };
 }

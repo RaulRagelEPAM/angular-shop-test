@@ -11,7 +11,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private cartService: CartService) { }
 
-  cart$ = this.cartService.cartItems$;
+  cart$ = this.cartService.cartItems$; // ** no es necesario suscribirse porque async del html se suscribe solo
   total$ = this.cartService.cartTotalPrice$;
   length$ = this.cartService.cartLength$;
 

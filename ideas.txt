@@ -7,7 +7,11 @@
 - Detail page
 - Usar API más grande con paginación
 - Login para guardar los datos a nivel de usuario
-- Agregar a fvoritos
+- Agregar a favoritos
+- Abstraer la variable products dentro del service como un observable
+    - Así cuando reciba info o un filtro, llega lo que haya que mostrar al subscribe
+    - De esta forma el componente solo muestra lo que recibe y es más limpio para filtrar
+    - No habria que hacer arrays auxiliares como _allProducts
 
 Hecho:
 - Borrar un item o un grupo del carrito

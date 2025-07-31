@@ -7,15 +7,15 @@
 </div>
 
 <!-- Productos -->
- <ng-template #hasProducts>
-     <section class="products" *ngIf="products.length; else noProducts">
-         <app-product
-             *ngFor="let product of products"
-             [product]="product"
-             (addToCartEvent)="addToCart($event)">
-         </app-product>
-     </section>
- </ng-template>
+<ng-template #hasProducts>
+    <section class="products" *ngIf="products.length; else noProducts">
+        <app-product
+            *ngFor="let product of products"
+            [product]="product"
+            (addToCartEvent)="addToCart($event)">
+        </app-product>
+    </section>
+</ng-template>
 
 <!-- No hay productos -->
 <ng-template #noProducts>

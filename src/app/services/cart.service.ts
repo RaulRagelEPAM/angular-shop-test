@@ -18,7 +18,7 @@ export class CartService {
 
   constructor(private utils: UtilsService) { }
 
-  // ** Getter de angular sin necesidad de hacer una función además agregamos
+  // ** Getter de angular sin necesidad de hacer una función ni llamarlo como una función, además agregamos
   // ** asObservable que permite que solo sea de lectura (no tenemos las funiones de los observables al devolverlo)
   get cartItems$(): Observable<Product[]> {
     return this.cartSubject.asObservable();
