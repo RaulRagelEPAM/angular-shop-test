@@ -4,15 +4,18 @@
     <mat-card-content>
         <img [src]="product.image">
     </mat-card-content>
-    <mat-card-header>
-        <mat-card-title>
+    <div class="product-header">
+        <div class="product-title" [title]="product.title">
             {{product.title}}
-        </mat-card-title>
+        </div>
+        <div class="rating" *ngIf="product.rating as rating">
+            <mat-icon>star</mat-icon> {{rating.rate}} <i>({{rating.count}})</i>
+        </div>
         <mat-card-actions>
             <button mat-flat-button color="primary" (click)="onClick()">
                 Añadir: {{ product.price | currency }}
                 <mat-icon>shopping_cart</mat-icon>
             </button>
         </mat-card-actions>
-    </mat-card-header>
+    </div>
 </mat-card>

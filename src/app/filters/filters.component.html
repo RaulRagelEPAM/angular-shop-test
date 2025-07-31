@@ -1,4 +1,10 @@
 
 <div class="toolbar">
-
+    <div class="filter-item"
+        *ngFor="let filter of filters"
+        (click)="selectFilter(filter.name)"
+        [ngClass]="{'focused': filter.focused}"
+    >
+        {{ filter.name }}
+    </div>
 </div>

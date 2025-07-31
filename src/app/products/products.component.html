@@ -1,6 +1,6 @@
 
 <!-- Spinner -->
-<div *ngIf="loading$ | async; else hasProducts" class="spinner">
+<div *ngIf="loading; else hasProducts" class="spinner">
    <section class="products">
         <h1>Cargando productos...</h1>
     </section>
@@ -21,10 +21,8 @@
 <ng-template #noProducts>
     <section class="products">
         <h1>No hay productos :(</h1>
+        <p class="error" *ngIf="errorMsg">
+            Se ha producido un error: {{ errorMsg }}
+        </p>
     </section>
 </ng-template>
-
-<!-- Error -->
-<div class="error" *ngIf="errorMsg && !products.length">
-  Error: {{ errorMsg }}
-</div>

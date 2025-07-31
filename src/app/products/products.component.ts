@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from './service/products.service';
 import { CartService } from '../header/shopping-cart/service/cart.service';
-import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators'
 import { Product } from './interface/product.interface';
 
@@ -15,7 +14,7 @@ export class ProductsComponent implements OnInit {
 
   products: Array<Product> = [];
   errorMsg: string = '';
-  loading$ = new BehaviorSubject<boolean>(false);
+  loading = false;
 
   constructor(private productService: ProductService, private cartService: CartService) { }
 
@@ -25,17 +24,16 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loading$.next(true);
+    this.loading = true;
     this.productService.getProducts()
     .pipe(
-      tap(() => this.loading$.next(false)),
-      tap(resp => console.log('Productos:', resp))
+      tap(() => this.loading = false)
     )
     .subscribe(
       resp => this.products = resp,
       error => {
         this.errorMsg = error;
-        this.loading$.next(false);
+        this.loading = false;
       }
     );
   }

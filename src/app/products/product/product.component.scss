@@ -17,13 +17,28 @@
             height: 100%;
         }
     }
-    .mat-card-header {
+    .product-header {
         display: flex;
         flex-direction: column;
     }
-    
-    .mat-card-title {
+    .product-title {
         font-size: 1rem;
+        font-weight: 500;
+        margin: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+    .rating {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .mat-icon {
+            color: var(--gold);
+            font-size: 20px;
+            text-align: end;
+        }
     }
     .mat-card-actions {
         margin: 0;

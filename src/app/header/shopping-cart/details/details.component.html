@@ -1,17 +1,17 @@
 
 <div class="details" *ngIf="isOpen">
-    <div class="header">
+    <div class="details-header">
         <span>Detalles del carrito</span>
         <button mat-icon-button (click)="onClose()">
             <mat-icon>close</mat-icon>
         </button>
     </div>
-    <div class="body" *ngIf="(detailItems$ | async) as items">
+    <div class="details-body" *ngIf="(detailItems$ | async) as items">
         <!-- <pre>{{ detailItems | json }}</pre> -->
          <div *ngIf="!items.length">
             <span>No hay productos en el carrito...</span>
          </div>
-         <mat-card *ngFor="let item of items">
+         <mat-card class="details-list" *ngFor="let item of items">
             <button mat-icon-button color="warn" title="Eliminar grupo" (click)="remove(item.id, true)">
                 <mat-icon>delete</mat-icon>
             </button>
@@ -19,12 +19,12 @@
                 <img [src]="item.image">
             </div>
             <div class="content">
-                <div class="header">
+                <div class="content-header">
                     <div class="clamp">
                         {{ item.title }}
                     </div>
                 </div>
-                <div class="info">
+                <div class="content-info">
                     <div>
                          <button mat-icon-button color="warn" title="Eliminar" (click)="remove(item.id)">
                             <mat-icon>remove</mat-icon>

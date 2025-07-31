@@ -2,9 +2,14 @@
 
 - Search
 - Filtros
+- Ordenación (A-z, por rating, etc)
 - Pagos
 - Detail page
-- Aumentar/disminuir cantidad de producto en los detalles
 - Usar API más grande con paginación
 - Login para guardar los datos a nivel de usuario
+- Agregar a fvoritos
+
+Hecho:
 - Borrar un item o un grupo del carrito
+- Aumentar/disminuir cantidad de producto en los detalles
+
