@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Product } from '../interface/product.interface';
+import { Product } from '../interfaces/product.interface';
 import { delay, map, tap } from 'rxjs/operators';
 
 @Injectable({

@@ -1,9 +1,9 @@
-import { UtilsService } from './../../../utils.service';
+import { UtilsService } from './utils.service';
 import { Injectable } from '@angular/core';
 
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Product } from 'src/app/products/interface/product.interface';
-import { Details } from '../details/interface/details';
+import { Product } from 'src/app/interfaces/product.interface';
+import { Details } from '../interfaces/details';
 
 @Injectable({
   providedIn: 'root'

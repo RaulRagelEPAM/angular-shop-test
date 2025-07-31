@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Product } from 'src/app/products/interface/product.interface';
-import { CartService } from '../service/cart.service';
-import { Details } from './interface/details';
-import { UtilsService } from 'src/app/utils.service';
+import { Product } from 'src/app/interfaces/product.interface';
+import { CartService } from '../../../services/cart.service';
+import { Details } from '../../../interfaces/details';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-details',

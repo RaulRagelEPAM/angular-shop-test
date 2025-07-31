@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ProductService } from './service/products.service';
-import { CartService } from '../header/shopping-cart/service/cart.service';
+import { ProductService } from '../../services/products.service';
+import { CartService } from '../../services/cart.service';
 import { tap } from 'rxjs/operators'
-import { Product } from './interface/product.interface';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-products',

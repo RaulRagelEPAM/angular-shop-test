@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../products/service/products.service';
-import { Product } from '../products/interface/product.interface';
-import { UtilsService } from '../utils.service';
-import { Filter } from './interface/filter';
+import { ProductService } from '../../services/products.service';
+import { Product } from '../../interfaces/product.interface';
+import { UtilsService } from '../../services/utils.service';
+import { Filter } from '../../interfaces/filter';
 
 @Component({
   selector: 'app-filters',
