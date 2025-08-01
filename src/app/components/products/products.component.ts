@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class ProductsComponent implements OnInit {
 
   products: Array<Product> = [];
-  _allProducts: Array<Product> = [];
+  // _allProducts: Array<Product> = [];
   errorMsg: string = '';
   loading = false;
   filter$!: Observable<string>;
@@ -33,14 +33,16 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.productService.init();
 
-    this.productService.getProducts()
+    this.productService.productsToShow$
     .pipe(
       tap(() => this.loading = false)
     )
     .subscribe(
       resp => {
-        this._allProducts = resp;
+        // this._allProducts = resp;
+        // this.filtersService.setFilters(resp);
         this.products = resp;
       },
       error => {
@@ -49,21 +51,21 @@ export class ProductsComponent implements OnInit {
       }
     );
 
-    this.filter$ = this.filtersService.filter$;
-    this.filter$
-    .pipe(
-      tap(filter => console.log('Filter changed:', filter))
-    )
-    .subscribe(
-      filter => {
-        this.products = this._allProducts;
-        if(filter !== 'Todos') {
-          this.products = this._allProducts.filter(
-            product => product.category.toLowerCase() === filter.toLowerCase()
-          );
-        }
-      }
-    );
+    // this.filter$ = this.filtersService.filter$;
+    // this.filter$
+    // .pipe(
+    //   tap(filter => console.log('Filter changed:', filter))
+    // )
+    // .subscribe(
+    //   filter => {
+    //     this.products = this._allProducts;
+    //     if(filter !== 'Todos') {
+    //       this.products = this._allProducts.filter(
+    //         product => product.category.toLowerCase() === filter.toLowerCase()
+    //       );
+    //     }
+    //   }
+    // );
   }
 
 }

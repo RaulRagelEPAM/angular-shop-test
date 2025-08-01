@@ -12,6 +12,7 @@
     - Así cuando reciba info o un filtro, llega lo que haya que mostrar al subscribe
     - De esta forma el componente solo muestra lo que recibe y es más limpio para filtrar
     - No habria que hacer arrays auxiliares como _allProducts
+    - Products service devolverá los productos que se vayan a mostrar, sin devolver products como tal
 
 Hecho:
 - Borrar un item o un grupo del carrito

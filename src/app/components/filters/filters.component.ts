@@ -15,36 +15,45 @@ export class FiltersComponent implements OnInit {
   filters: Filter[] = [];
 
   constructor(
-    private productService: ProductService,
+    // private productService: ProductService,
     private utils: UtilsService,
     private filtersService:FiltersService
   ) { }
 
-  ngOnInit(): void {
-    this.productService.products$ // ** no hacemos llamada adicional, solo vemos los cambios en products
+  ngOnInit(): void { // ! este se tiene que suscribir a los filtros cuando cambien y mostrarlos
+    // this.filter.products$ // ** no hacemos llamada adicional, solo vemos los cambios en products
+    // .subscribe(
+    //   products => {
+    //     if(products) this.parseFilters(products);
+    //     // ** La primera vez es vacío porque BehaviorSubject emite un valor cuando nos suscribimos
+    //     // console.log('filters', this.filters);
+    //   }
+    // );
+    this.filtersService.filters$ // ** no hacemos llamada adicional, solo vemos los cambios en filtros
     .subscribe(
-      products => {
-        if(products) this.parseFilters(products);
-        // ** La primera vez es vacío porque BehaviorSubject emite un valor cuando nos suscribimos
-        // console.log('filters', this.filters);
+      filters => {
+        // if(filters) this.parseFilters(products);
+        if(filters) {
+          this.filters = filters;
+        }
       }
     );
   };
 
-  parseFilters(products: Product[]): void {
-    let uniqueFilters = [...new Set(products.map(item => item.category))];
-    let filters = uniqueFilters.map(item => ({
-      name: this.utils.capitalize(item),
-      focused: false
-    }));
+  // parseFilters(products: Product[]): void {
+  //   let uniqueFilters = [...new Set(products.map(item => item.category))];
+  //   let filters = uniqueFilters.map(item => ({
+  //     name: this.utils.capitalize(item),
+  //     focused: false
+  //   }));
 
-    filters.unshift({
-      name: 'Todos',
-      focused: true
-    });
+  //   filters.unshift({
+  //     name: 'Todos',
+  //     focused: true
+  //   });
 
-    this.filters = filters;
-  };
+  //   this.filters = filters;
+  // };
 
   selectFilter(filterSelected: string): void {
     this.filters = this.filters.map(filter => ({
@@ -52,6 +61,6 @@ export class FiltersComponent implements OnInit {
       focused: filter.name === filterSelected
     }));
 
-    this.filtersService.setFilter(filterSelected);
+    this.filtersService.setCurrentFilter(filterSelected);
   };
 }

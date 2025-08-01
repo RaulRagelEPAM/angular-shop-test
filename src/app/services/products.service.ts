@@ -15,7 +15,8 @@ export class ProductService {
   // ** Local JSON: 'server/db.json'
   // private productsURL: string = 'http://localhost:3000/products';
 
-  private productsSubject = new BehaviorSubject<Product[] | null>(null);
+  private productsSubject = new BehaviorSubject<Product[]>([]);
+  private productsToShowSubject = new BehaviorSubject<Product[]>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -23,16 +24,37 @@ export class ProductService {
     return this.productsSubject.asObservable();
   }
 
-  getProducts(): Observable<Product[]> {
-    if(this.productsSubject.value) return of(this.productsSubject.value);
-    return this.http.get<Product[]>(this.productsURL)
+  get productsToShow$(): Observable<Product[]> { // **
+    return this.productsToShowSubject.asObservable();
+  }
+
+  // getProducts(): Observable<Product[]> {
+  //   if(this.productsSubject.value) return of(this.productsSubject.value);
+  //   return this.http.get<Product[]>(this.productsURL)
+  //   .pipe(
+  //     tap(response => console.log('Productos:', response)),
+  //     tap(response => this.productsSubject.next(response))
+  //   );
+  // }
+
+  init(): void {
+    this.http.get<Product[]>(this.productsURL)
     .pipe(
-      tap(response => console.log('Productos:', response)),
-      tap(response => this.productsSubject.next(response))
+      tap(response => console.log('Productos:', response))
+    )
+    .subscribe(
+      response => {
+        this.productsSubject.next(response);
+        this.productsToShowSubject.next(response);
+      }
     );
   }
 
-  getSearch(str: string): any {
+  // productsToShow(): Observable<Product[]> {
+
+  // }
+
+  getSearch(str: string): any { // productsToShow$.next
     return of(this.searchProducts(str));
   }
 
