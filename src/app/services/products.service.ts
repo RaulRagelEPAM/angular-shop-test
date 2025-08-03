@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { delay, map, tap } from 'rxjs/operators';
 import { FiltersService } from './filters.service';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,11 @@ export class ProductService {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   private productsToShowSubject = new BehaviorSubject<Product[]>([]);
 
-  constructor(private http: HttpClient, private filtersService: FiltersService) { }
+  constructor(
+    private http: HttpClient,
+    private filtersService: FiltersService,
+    private searchService: SearchService
+  ) { }
 
   get products$(): Observable<Product[] | null> { // **
     return this.productsSubject.asObservable();
@@ -37,8 +42,8 @@ export class ProductService {
     .subscribe(
       response => {
         this.productsSubject.next(response);
-        this.productsToShowSubject.next(response);
         this.filtersService.initFilters(response);
+        this.productsToShowSubject.next(response);
       }
     );
 
@@ -51,24 +56,17 @@ export class ProductService {
         this.productsToShowSubject.next(this.filtersService.getFilteredProducts(this.productsSubject.value, filter))
       }
     );
-  }
 
-  getSearch(str: string): any {
-    return of(this.searchProducts(str));
-  }
-
-  searchProducts(str: string): any {
-    if(this.productsSubject.value) {
-      return this.productsSubject.value.filter(
-        item => this.clean(item.title).includes(this.clean(str))
-      );
-    }
-  }
-
-  clean(str: string) {
-    return str
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '');
+    this.searchService.searchTxt$
+    .pipe(
+      tap(searchTxt => console.log('Search changed:', searchTxt))
+    )
+    .subscribe(
+      searchTxt => {
+        this.filtersService.resetFilter(); // Reseteamos filtros cuando se realiza una búsqueda
+        this.productsToShowSubject.next(this.searchService.searchProducts(this.productsSubject.value, searchTxt))
+      }
+    );
   }
 }
 

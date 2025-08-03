@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit {
 
   products: Array<Product> = [];
   filterSelected = '';
-  // _allProducts: Array<Product> = [];
   errorMsg: string = '';
   loading = false;
   filter$!: Observable<string>;

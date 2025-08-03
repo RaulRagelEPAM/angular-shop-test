@@ -34,7 +34,7 @@ export class FiltersService {
 
     this.filtersSubject.next(filters);
 
-    this.setCurrentFilter(this.allFilter.name);
+    this.resetFilter();
   }
 
   setCurrentFilter(filterSelected: string) {
@@ -54,6 +54,10 @@ export class FiltersService {
         );
       }
     return productsToShow;
+  }
+
+  resetFilter() {
+    this.setCurrentFilter(this.allFilter.name);
   }
 
 }
