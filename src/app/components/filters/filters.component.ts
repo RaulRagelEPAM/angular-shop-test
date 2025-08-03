@@ -14,53 +14,18 @@ export class FiltersComponent implements OnInit {
 
   filters: Filter[] = [];
 
-  constructor(
-    // private productService: ProductService,
-    private utils: UtilsService,
-    private filtersService:FiltersService
-  ) { }
+  constructor(private filtersService:FiltersService) { }
 
-  ngOnInit(): void { // ! este se tiene que suscribir a los filtros cuando cambien y mostrarlos
-    // this.filter.products$ // ** no hacemos llamada adicional, solo vemos los cambios en products
-    // .subscribe(
-    //   products => {
-    //     if(products) this.parseFilters(products);
-    //     // ** La primera vez es vacío porque BehaviorSubject emite un valor cuando nos suscribimos
-    //     // console.log('filters', this.filters);
-    //   }
-    // );
+  ngOnInit(): void {
     this.filtersService.filters$ // ** no hacemos llamada adicional, solo vemos los cambios en filtros
     .subscribe(
       filters => {
-        // if(filters) this.parseFilters(products);
-        if(filters) {
-          this.filters = filters;
-        }
+        if(filters) this.filters = filters;
       }
     );
   };
 
-  // parseFilters(products: Product[]): void {
-  //   let uniqueFilters = [...new Set(products.map(item => item.category))];
-  //   let filters = uniqueFilters.map(item => ({
-  //     name: this.utils.capitalize(item),
-  //     focused: false
-  //   }));
-
-  //   filters.unshift({
-  //     name: 'Todos',
-  //     focused: true
-  //   });
-
-  //   this.filters = filters;
-  // };
-
   selectFilter(filterSelected: string): void {
-    this.filters = this.filters.map(filter => ({
-      ...filter,
-      focused: filter.name === filterSelected
-    }));
-
     this.filtersService.setCurrentFilter(filterSelected);
   };
 }

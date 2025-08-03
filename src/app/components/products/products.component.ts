@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class ProductsComponent implements OnInit {
 
   products: Array<Product> = [];
+  filterSelected = '';
   // _allProducts: Array<Product> = [];
   errorMsg: string = '';
   loading = false;
@@ -22,12 +23,10 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService,
-    private filtersService: FiltersService
+    private cartService: CartService
   ) { }
 
   addToCart(product: Product): void {
-    // console.log('Add to cart:', product);
     this.cartService.addToCart(product);
   }
 
@@ -41,8 +40,6 @@ export class ProductsComponent implements OnInit {
     )
     .subscribe(
       resp => {
-        // this._allProducts = resp;
-        // this.filtersService.setFilters(resp);
         this.products = resp;
       },
       error => {
@@ -50,22 +47,6 @@ export class ProductsComponent implements OnInit {
         this.loading = false;
       }
     );
-
-    // this.filter$ = this.filtersService.filter$;
-    // this.filter$
-    // .pipe(
-    //   tap(filter => console.log('Filter changed:', filter))
-    // )
-    // .subscribe(
-    //   filter => {
-    //     this.products = this._allProducts;
-    //     if(filter !== 'Todos') {
-    //       this.products = this._allProducts.filter(
-    //         product => product.category.toLowerCase() === filter.toLowerCase()
-    //       );
-    //     }
-    //   }
-    // );
   }
 
 }

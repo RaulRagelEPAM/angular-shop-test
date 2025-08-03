@@ -10,34 +10,50 @@ import { UtilsService } from './utils.service';
 })
 export class FiltersService {
 
+  readonly allFilter: Filter = {
+    name: 'Todos',
+    focused: false
+  }
+
   private filterSelectedSubject = new BehaviorSubject<string>('');
   private filtersSubject = new BehaviorSubject<Filter[]>([]);
 
-  constructor(
-    private utils: UtilsService,
-    private productService: ProductService
-  ) { }
+  constructor(private utils: UtilsService) { }
 
   filterSelected$ = this.filterSelectedSubject.asObservable();
   filters$ = this.filtersSubject.asObservable();
 
-  setFilters(products: Product[]): void {
+  initFilters(products: Product[]): void {
     let uniqueFilters = [...new Set(products.map(item => item.category))];
     let filters = uniqueFilters.map(item => ({
       name: this.utils.capitalize(item),
       focused: false
     }));
 
-    filters.unshift({
-      name: 'Todos',
-      focused: true
-    });
+    filters.unshift(this.allFilter);
 
     this.filtersSubject.next(filters);
+
+    this.setCurrentFilter(this.allFilter.name);
   }
 
-  setCurrentFilter(filter: string) {
-    this.filterSelectedSubject.next(filter);
+  setCurrentFilter(filterSelected: string) {
+    this.filtersSubject.next(this.filtersSubject.value.map(filter => ({
+      ...filter,
+      focused: filter.name === filterSelected
+    })));
+
+    this.filterSelectedSubject.next(filterSelected);
+  }
+
+  getFilteredProducts(products: Product[], filter: string) {
+    let productsToShow = products;
+    if(filter !== this.allFilter.name) {
+        productsToShow = products.filter(
+          product => product.category.toLowerCase() === filter.toLowerCase()
+        );
+      }
+    return productsToShow;
   }
 
 }

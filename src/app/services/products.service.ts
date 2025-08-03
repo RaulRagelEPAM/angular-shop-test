@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { delay, map, tap } from 'rxjs/operators';
+import { FiltersService } from './filters.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ProductService {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   private productsToShowSubject = new BehaviorSubject<Product[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private filtersService: FiltersService) { }
 
   get products$(): Observable<Product[] | null> { // **
     return this.productsSubject.asObservable();
@@ -27,15 +28,6 @@ export class ProductService {
   get productsToShow$(): Observable<Product[]> { // **
     return this.productsToShowSubject.asObservable();
   }
-
-  // getProducts(): Observable<Product[]> {
-  //   if(this.productsSubject.value) return of(this.productsSubject.value);
-  //   return this.http.get<Product[]>(this.productsURL)
-  //   .pipe(
-  //     tap(response => console.log('Productos:', response)),
-  //     tap(response => this.productsSubject.next(response))
-  //   );
-  // }
 
   init(): void {
     this.http.get<Product[]>(this.productsURL)
@@ -46,15 +38,22 @@ export class ProductService {
       response => {
         this.productsSubject.next(response);
         this.productsToShowSubject.next(response);
+        this.filtersService.initFilters(response);
+      }
+    );
+
+    this.filtersService.filterSelected$
+    .pipe(
+      tap(filter => console.log('Filter changed:', filter))
+    )
+    .subscribe(
+      filter => {
+        this.productsToShowSubject.next(this.filtersService.getFilteredProducts(this.productsSubject.value, filter))
       }
     );
   }
 
-  // productsToShow(): Observable<Product[]> {
-
-  // }
-
-  getSearch(str: string): any { // productsToShow$.next
+  getSearch(str: string): any {
     return of(this.searchProducts(str));
   }
 
