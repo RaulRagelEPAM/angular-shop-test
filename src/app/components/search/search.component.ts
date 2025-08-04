@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.searchControl.valueChanges
     .pipe(
-      debounceTime(1000), // espera 1 segundo antes de seguir
+      debounceTime(500), // espera 1 segundo antes de seguir
       // distinctUntilChanged(), // no busca si no cambió el texto
       switchMap(value => this.searchService.search(value)) // **
     )

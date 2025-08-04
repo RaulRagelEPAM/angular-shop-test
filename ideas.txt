@@ -7,6 +7,9 @@
 - Detail page
 - Usar API más grande con paginación
 - Login para guardar los datos a nivel de usuario
+    - Si hay usuario, podemos agregar a favoritos
+    - Aparece un nuevo filtro 'Favoritos'
+    - Podemos comprar y ver nuestros pedidos
 - Agregar a favoritos
 - Abstraer la variable products dentro del service como un observable
     - Así cuando reciba info o un filtro, llega lo que haya que mostrar al subscribe
