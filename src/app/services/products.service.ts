@@ -94,7 +94,7 @@ export class ProductService {
 //   map(response => response.products)
 // );
 
-// Notas:
+// NOTAS
 // ** productsSubject es el observable que usamos aqui a nivel privado y products$ el que usamos en el exterior
 // ** de esta forma no exponemos productsSubject y sus propiedades, pero realmente ambos son lo mismo
 // ** incluso podría ser una variable normal publica de la clase (products$ = this.productsSubject.asObservable();)

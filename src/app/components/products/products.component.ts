@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit {
     .pipe(
       tap(() => this.loading = false)
     )
-    .subscribe(
+    .subscribe( // **
       resp => {
         this.products = resp;
       },
@@ -50,3 +50,21 @@ export class ProductsComponent implements OnInit {
 
 }
 
+
+// NOTAS 
+//** Cuando hacemos un .subscribe, realmente estamos creando una suscripción anónima, pero esto
+//** podríamos guardarlo en un objeto de tipo Subscription para luego poder hacer un unsubscribe
+//** si fuera necesario hacer una dessuscripción.
+//** Si por ejemplo quisieramos dejar de recibir productos anque la variable productsToShow$ siga cambiando,
+//** tendríamos que almancenar la suscripción tal que así:
+/*
+    //** Creamos una variable que maneja la suscripción y almacenamos el observable.subscribe
+    private productsSub!: Subscription;
+
+    this.productsSub = this.productService.productsToShow$ ...(resto del código)
+
+    //** Y ahora cuando se destruye el componente (por ejemplo) podemos dessuscribirnos:
+    ngOnDestroy(): void {
+      this.productsSub?.unsubscribe(); // Liberamos la memoria si dejamos de usar el componente
+    }
+*/

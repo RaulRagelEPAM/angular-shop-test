@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
 
 }
 
-// Notas:
+// NOTAS
 // ** switchMap: 
 // ** es un operador de alta priridad, lo que quiere decir que trabaja con observables dentro de observables,
 // ** por lo que permite que primero se resuelva el valueChanges y luego el search

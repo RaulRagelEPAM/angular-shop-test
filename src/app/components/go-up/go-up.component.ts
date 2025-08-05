@@ -42,7 +42,7 @@ export class GoUpComponent implements OnInit {
 }
 
 
-// ** NOTAS
+// NOTAS
 /*
   Clase hidden:
   Ambas líneas aplican la clase hidden en función de showButton:
