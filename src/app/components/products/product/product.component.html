@@ -8,9 +8,15 @@
         <div class="product-title" [title]="product.title">
             {{product.title}}
         </div>
+        <div class="rating">
+            <span *ngIf="product.averageRating"><mat-icon>star</mat-icon> {{product.averageRating}}</span>
+            <i>({{product.ratingCount || 0}})</i>
+        </div>
+        <!-- OTRA FORMA (si no hubieramos mapeado averageRating y ratingCount en la respuesta)
         <div class="rating" *ngIf="product.rating as rating">
             <mat-icon>star</mat-icon> {{rating.rate}} <i>({{rating.count}})</i>
         </div>
+        -->
         <mat-card-actions>
             <button mat-flat-button color="primary" (click)="onClick()">
                 Añadir: {{ product.price | currency }}

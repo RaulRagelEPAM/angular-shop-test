@@ -37,7 +37,15 @@ export class ProductService {
   init(): void {
     this.http.get<Product[]>(this.productsURL)
     .pipe(
-      tap(response => console.log('Productos:', response))
+      tap(response => console.log('Productos:', response)),
+      map(response => {
+        return response.map(product => ({
+          ...product,
+          averageRating: product.rating.rate, // mapeamos los datos que no existen en la respuesta de la api
+          ratingCount: product.rating.count
+        }));
+      }),
+      tap(response => console.log('Productos mapeados:', response))
     )
     .subscribe(
       response => {

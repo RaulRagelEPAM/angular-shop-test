@@ -38,11 +38,15 @@ export class SearchComponent implements OnInit {
 
 }
 
-// ! Queremos poder buscar cualquier cosa, ignorando mayusuclas, minusculas, espacios, comillas etc
-// ! esto podemos hacerlo si quitamos todos los espacios, comas y aplicamos toLowerCase,
-// ! tanto a los productos como a la búsqueda
-
 // Notas:
-//** switchMap: cancela la anterior llamada si se ha seguido escribiendo
-//**            es importante que se devuelva un observable (en este caso getSearch debe serlo)
-//**            si no tienes datos que sean asincronos utiliza of()
+// ** switchMap: 
+// ** es un operador de alta priridad, lo que quiere decir que trabaja con observables dentro de observables,
+// ** por lo que permite que primero se resuelva el valueChanges y luego el search
+
+// ** en este caso, lo usamos para que cancele la anterior llamada si se ha seguido escribiendo
+// ** es importante que se devuelva un observable, en este caso search debe serlo, por lo que
+// ** usamos of() para devolver datos planos pero en forma de observable
+
+// ** tambien se podría usar para hacer una llamada dentro de otra si por ejemplo necesitamos llamar
+// ** a una api para obtener un id para luego llamar a otra api distinta usando ese id
+

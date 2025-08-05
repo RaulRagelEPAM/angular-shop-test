@@ -1,6 +1,7 @@
 
 
 <div class="search-container">
+    <mat-icon>search</mat-icon>
     <input matInput id="search" type="text" [formControl]="searchControl" placeholder="Busca un producto" />
     <button mat-icon-button (click)="emptyInput()" title="Limpiar búsqueda" *ngIf="searchControl.value">
         <mat-icon>close</mat-icon>
