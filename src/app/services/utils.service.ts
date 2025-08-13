@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+type PlatformType = 'WEB' | 'TIZEN' | 'WEBOS';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,5 +23,17 @@ export class UtilsService {
   
   capitalizeArray(arr: string[]): string[] {
     return arr.map(s => this.capitalize(s));
+  }
+
+  detectPlatform(): PlatformType {
+    if (typeof window !== 'undefined') {
+      if ((window as any).tizen) {
+        return 'TIZEN';
+      }
+      if ((window as any).webOS || (window as any).PalmSystem) {
+        return 'WEBOS';
+      }
+    }
+    return 'WEB';
   }
 }

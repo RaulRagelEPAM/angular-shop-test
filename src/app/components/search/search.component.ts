@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operato
 import { Product } from 'src/app/interfaces/product.interface';
 import { ProductService } from 'src/app/services/products.service';
 import { SearchService } from 'src/app/services/search.service';
+import { VoiceService } from 'src/app/services/voice.service';
 
 @Component({
   selector: 'app-search',
@@ -13,27 +14,42 @@ import { SearchService } from 'src/app/services/search.service';
 export class SearchComponent implements OnInit {
 
   searchControl = new FormControl('');
-  results: Product[] = [];
+  recording:boolean = false;
 
-  constructor(private searchService: SearchService, ) { }
+  constructor(private searchService: SearchService, private voiceService: VoiceService) { }
 
   ngOnInit(): void {
     this.searchControl.valueChanges
     .pipe(
-      debounceTime(500), // espera 1 segundo antes de seguir
+      debounceTime(500), // espera medio segundo antes de seguir
       // distinctUntilChanged(), // no busca si no cambió el texto
       switchMap(value => this.searchService.search(value)) // **
     )
     .subscribe(
-      results => {
-        console.log('RESULTS', results);
-        // if(results) this.results = results;
+      newText => {
+        console.log('searchControl changed:', newText);
       }
     );
+
+    this.voiceService.transcript$.subscribe(text => {
+      if (text) {
+        console.log('transcript changed:', text);
+        this.searchControl.setValue(text);
+      }
+    });
+
+    this.voiceService.recording$.subscribe(isRecording => {
+      console.log('isRecording:', isRecording);
+      this.recording = isRecording;
+    });
   }
 
   emptyInput() {
     this.searchControl.setValue('');
+  }
+
+  startVoice() {
+    this.voiceService.startListening();
   }
 
 }

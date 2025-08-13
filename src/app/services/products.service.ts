@@ -37,7 +37,7 @@ export class ProductService {
   init(): void {
     this.http.get<Product[]>(this.productsURL)
     .pipe(
-      tap(response => console.log('Productos:', response)),
+      // tap(response => console.log('Productos:', response)),
       map(response => {
         return response.map(product => ({
           ...product,
@@ -45,7 +45,7 @@ export class ProductService {
           ratingCount: product.rating.count
         }));
       }),
-      tap(response => console.log('Productos mapeados:', response))
+      // tap(response => console.log('Productos mapeados:', response))
     )
     .subscribe(
       response => {
@@ -57,7 +57,7 @@ export class ProductService {
 
     this.filtersService.filterSelected$
     .pipe(
-      tap(filter => console.log('Filter changed:', filter))
+      // tap(filter => console.log('Filter changed:', filter))
     )
     .subscribe(
       filter => {
@@ -67,7 +67,7 @@ export class ProductService {
 
     this.searchService.searchTxt$
     .pipe(
-      tap(searchTxt => console.log('Search changed:', searchTxt))
+      // tap(searchTxt => console.log('Search changed:', searchTxt))
     )
     .subscribe(
       searchTxt => {
