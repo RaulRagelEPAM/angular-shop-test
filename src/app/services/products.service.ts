@@ -37,7 +37,15 @@ export class ProductService {
   init(): void {
     this.http.get<Product[]>(this.productsURL)
     .pipe(
-      tap(response => console.log('Productos:', response))
+      tap(response => console.log('Productos:', response)),
+      map(response => {
+        return response.map(product => ({
+          ...product,
+          averageRating: product.rating.rate, // mapeamos los datos que no existen en la respuesta de la api
+          ratingCount: product.rating.count
+        }));
+      }),
+      tap(response => console.log('Productos mapeados:', response))
     )
     .subscribe(
       response => {
@@ -86,7 +94,7 @@ export class ProductService {
 //   map(response => response.products)
 // );
 
-// Notas:
+// NOTAS
 // ** productsSubject es el observable que usamos aqui a nivel privado y products$ el que usamos en el exterior
 // ** de esta forma no exponemos productsSubject y sus propiedades, pero realmente ambos son lo mismo
 // ** incluso podría ser una variable normal publica de la clase (products$ = this.productsSubject.asObservable();)

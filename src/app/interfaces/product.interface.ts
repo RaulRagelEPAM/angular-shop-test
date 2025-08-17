@@ -10,5 +10,7 @@ export interface Product {
   image: string;
   price: number;
   rating: Rating;
+  averageRating: number;
+  ratingCount: number,
   title: string;
 }
