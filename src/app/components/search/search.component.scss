@@ -32,5 +32,23 @@
         position: absolute;
         right: -45px;
     }
+
+    button.voice-search  {
+        left: -65px;
+    }
+    .voice-search mat-icon {
+        color: white;
+    }
+
+    button.red {
+        color: var(--red);
+    }
+
+    button.red::after {
+        content: 'Grabando...';
+        position: absolute;
+        left: -10px;
+        top: 23px;
+    }
 }
 
