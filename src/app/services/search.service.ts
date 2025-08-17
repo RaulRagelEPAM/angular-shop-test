@@ -20,12 +20,12 @@ export class SearchService {
   searchProducts(products: Product[], str: string): any {
     if(products) {
       return products.filter(
-        item => this.cleanTxt(item.title).includes(this.cleanTxt(str))
+        item => this.minifyTxt(item.title).includes(this.minifyTxt(str))
       );
     }
   }
 
-  cleanTxt(str: string) {
+  minifyTxt(str: string) {
     return str
       .toLowerCase()
       .replace(/[^a-z0-9]/g, '');
